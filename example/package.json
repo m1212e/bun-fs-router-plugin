@@ -1,11 +1,11 @@
 {
-  "name": "bun-fs-router-plugin",
-  "module": "index.ts",
-  "type": "module",
+  "name": "example",
+  "main": "src/main.ts",
   "devDependencies": {
     "bun-types": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
-  }
+  },
+  "type": "module"
 }

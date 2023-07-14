@@ -1,19 +1,14 @@
-import { BunPlugin, OnLoadCallback } from "bun";
-import { existsSync, readdirSync, statSync } from "fs";
-import { exists, readFile, readdir, stat } from "fs/promises";
+import {BunPlugin} from "bun";
+import {exists, readFile} from "fs/promises";
 import {
   join,
-  relative,
   dirname,
-  isAbsolute,
-  normalize,
-  basename,
   extname,
 } from "path";
 
 const routes = "routes";
 
-export function bunFsRouterPlugin(): BunPlugin {
+export function plugin(): BunPlugin {
   return {
     name: "bun-fs-router-plugin",
     setup(build) {
@@ -51,8 +46,17 @@ export function bunFsRouterPlugin(): BunPlugin {
               encoding: "utf-8",
             });
 
+            // now run the macro to set the handler paths at build time
+            const t = new Bun.Transpiler({
+              macro: {
+                "bun-fs-router-plugin": {
+                  GET: "bun-fs-router-plugin/macros",
+                },
+              },
+            });
+
             return {
-              contents: fileContent,
+              contents: await t.transform(fileContent),
             };
           }
 
@@ -64,7 +68,7 @@ export function bunFsRouterPlugin(): BunPlugin {
 }
 
 import path from "path";
-import { promises as fs } from "fs";
+import {promises as fs} from "fs";
 
 async function getAllFilePaths(directoryPath: string) {
   const fileNames = await fs.readdir(directoryPath);

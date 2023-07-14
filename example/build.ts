@@ -1,15 +1,19 @@
-import { bunFsRouterPlugin } from "../plugin";
+import plugin from "bun-fs-router-plugin";
 
-console.log("Building...");
+console.info("Building...");
 
-await Bun.build({
+const output = await Bun.build({
   entrypoints: ["./src/main.ts"],
   outdir: "./out",
-  plugins: [bunFsRouterPlugin()],
+  plugins: [plugin()],
   target: "bun",
   format: "esm",
   splitting: true,
   sourcemap: "external",
   // minify: true,
 });
-console.log("Done!");
+if (!output.success) {
+  console.error(output.logs);
+} else {
+  console.info("Done!");
+}

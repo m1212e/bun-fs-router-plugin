@@ -1,0 +1,8 @@
+{
+  "name": "bun-fs-router-plugin",
+  "type": "module",
+  "devDependencies": {
+    "bun-types": "latest",
+    "typescript": "^5.1.6"
+  }
+}
