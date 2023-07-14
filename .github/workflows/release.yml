@@ -12,6 +12,7 @@ jobs:
       - name: Install bun
         uses: oven-sh/setup-bun@v1
       - name: Install dependencies
+        working-directory: ./plugin
         run: bun install
       - name: Build app
         working-directory: ./plugin
@@ -22,4 +23,4 @@ jobs:
         with:
           token: ${{ secrets.NPM_TOKEN }}
           access: public
-          package: ./out/package.json
+          package: ./plugin/out/package.json
