@@ -1,0 +1,25 @@
+on:
+  release:
+    types: [created]
+
+name: Deploy package
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Install bun
+        uses: oven-sh/setup-bun@v1
+      - name: Install dependencies
+        run: bun install
+      - name: Build app
+        working-directory: ./plugin
+        env:
+          REF_NAME: ${{ github.ref_name }}
+        run: bun build.ts
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          access: public
+          package: ./out/package.json
