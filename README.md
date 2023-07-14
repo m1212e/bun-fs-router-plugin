@@ -59,7 +59,7 @@ if (!output.success) {
 
 We chose to put the entrypoint into `src/main.ts` in our bundler config, but you are free to adjust this to your liking.
 
-Next, we import the `serve` function into out main file:
+Next, we import the `serve` function into our main file:
 
 ```ts
 import {serve} from "bun-fs-router-plugin";
