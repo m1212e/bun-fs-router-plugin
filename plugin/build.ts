@@ -59,6 +59,8 @@ if (diagnostics.length > 0) {
     }));
 }
 
+await copyFile(join("..", "README.md"), join(outdir, "README.md"));
+
 const outPackageJsonPath = join(outdir, "package.json");
 await copyFile("package.json", outPackageJsonPath);
 
