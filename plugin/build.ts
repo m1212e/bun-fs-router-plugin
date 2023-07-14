@@ -68,7 +68,7 @@ if (process.env.REF_NAME) {
 
     const outPackageJsonContent = JSON.parse(await readFile(outPackageJsonPath, {encoding: "utf-8"}));
     outPackageJsonContent.version = process.env.REF_NAME;
-    await writeFile(outPackageJsonPath, outPackageJsonContent);
+    await writeFile(outPackageJsonPath, JSON.stringify(outPackageJsonContent), {encoding: "utf-8"});
 }
 
 console.info("Done!");
