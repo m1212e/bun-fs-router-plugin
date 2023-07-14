@@ -28,7 +28,9 @@ This allows for better bundling and optimizing, since the directory structure do
 
 ## How do I get started?
 Install the [bun-fs-router-plugin](https://www.npmjs.com/package/bun-fs-router-plugin) to your project.
-
+```ts
+bun i bun-fs-router-plugin
+```
 Create a build script, typically a `build.ts` at your project root.
 Configure the bundler to your needs and add the plugin:
 
