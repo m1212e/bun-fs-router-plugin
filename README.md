@@ -82,4 +82,4 @@ const users: any[] = []
 
 GET((req) => new Response(JSON.stringify(users)), BUN_FS_ROUTER_PLUGIN_RELATIVE_PATH);
 ```
-All common HTTP methods are available as functions you can import and use. Notice how we pass two arguments to the `GET` call. The first parameter is the handler function. It receives the native request object and can optionally return a native response object. Handlers can be async. The second argument is the more ✨magical✨ one. It gets replaced with the relative path depending on the file it is in at build time. If you want you can also provide a custom path like `"/my/custom/route"`.
+All common HTTP methods are available as functions you can import and use. Notice how we pass two arguments to the `GET` call. The first parameter is the handler function. It receives the native request object and can optionally return a native response object. Handlers can be async. The second argument is the more ✨magical✨ one. It gets replaced with the relative path depending on the file it is in at build time. If you want you can instead provide a custom path like `"/my/custom/route"`.
