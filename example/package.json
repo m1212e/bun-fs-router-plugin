@@ -1,6 +1,9 @@
 {
   "name": "example",
   "main": "src/main.ts",
+  "dependencies": {
+    "bun-fs-router-plugin": "link:bun-fs-router-plugin"
+  },
   "devDependencies": {
     "bun-types": "latest"
   },

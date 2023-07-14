@@ -6,7 +6,9 @@ export enum HTTPMethod {
     PATCH = "PATCH",
 }
 
-export type Handler = (req: Request) => Response;
+export type Handler = (req: Request) => Response | Promise<Response> | void | Promise<void>;
 
-export type _GET = (handler: Handler) => void;
-export const GET: _GET = undefined as any; // these should not be actual values, since we replace them by their macro equivalent at build time
+/**
+ * This equals the relative path after building with the bun-fs-router-plugin
+ */
+export const BUN_FS_ROUTER_PLUGIN_RELATIVE_PATH = "";

@@ -15,23 +15,7 @@ let output = await Bun.build({
     splitting: true,
     sourcemap: "external",
     minify: true,
-    root: "."
-});
-
-if (!output.success) {
-    console.error(output.logs);
-    throw new Error("Bundling failed!");
-}
-
-output = await Bun.build({
-    entrypoints: ["./src/macros/index.ts"],
-    outdir: join(outdir, "macros"),
-    target: "bun",
-    format: "esm",
-    splitting: true,
-    sourcemap: "external",
-    minify: true,
-    root: "."
+    root: "./src"
 });
 
 if (!output.success) {
@@ -75,11 +59,12 @@ if (diagnostics.length > 0) {
     }));
 }
 
+const outPackageJsonPath = join(outdir, "package.json");
+await copyFile("package.json", outPackageJsonPath);
+
 // if there is a github action ref name set, adjust the version in the package json
 if (process.env.REF_NAME) {
     console.info("Adjust package.json version...");
-    const outPackageJsonPath = join(outdir, "package.json");
-    await copyFile("package.json", outPackageJsonPath);
 
     const outPackageJsonContent = JSON.parse(await readFile(outPackageJsonPath, {encoding: "utf-8"}));
     outPackageJsonContent.version = process.env.REF_NAME;
